@@ -1,10 +1,13 @@
-all: employeeDB
+all: employeeDemo
 
-employeeDB.o:binaryTree.h employeeList.c
-	gcc employeeList.c -c -g -o employeeDB.o
+employeeList.o: employeeList.c binaryTree.h
+	cc -c -g employeeList.c
 
-employeeDB: employeeDB.o
-	gcc employeeDB.o -o employeeDB
+employeeDemo.o: binaryTree.h employeeDBDemo.c
+	cc -c -g employeeDBDemo.c 
+
+employeeDemo: employeeDBDemo.o employeeList.o
+	cc -o $@ $^
 
 clean:
-	rm -f employeeDB *.o
+	rm -f employeeDBDemo employeeDemo *.o
